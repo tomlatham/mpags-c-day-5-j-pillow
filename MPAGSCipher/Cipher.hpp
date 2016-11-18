@@ -10,15 +10,15 @@ class Cipher {
 	public:
 	
 	Cipher() = default;
-	Cipher(const Cipher& rhs) = default; ///<  
-	Cipher(Cipher&& rhs) = default; ///<
-	Cipher & operator=(const Cipher rhs) = default; ///< 
-	Cipher& operator=(Cipher&& rhs) = default; ///< 
+	Cipher(const Cipher& rhs) = default; ///< Copy constructor
+	Cipher(Cipher&& rhs) = default; ///< Move constructor
+	Cipher& operator=(const Cipher& rhs) = default; ///< Copy assignment operator
+	Cipher& operator=(Cipher&& rhs) = default; ///< Move assignment operator
 	virtual ~Cipher() = default; ///< Virtual Destructor 
 	
-	virtual std::string applyCipher( cons std::string& input, const CipherMode mode ) const = 0;
+	virtual std::string applyCipher( const std::string& input, const CipherMode mode ) const = 0;
 	
 	
-}
+};
 
 #endif

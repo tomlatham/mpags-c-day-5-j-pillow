@@ -13,3 +13,4 @@ TEST_CASE("Vigenere Cipher decryption", "[Vigenere]") {
   VigenereCipher cc{"key"};
   REQUIRE( cc.applyCipher("RIJVSUYVJN", CipherMode::Decrypt) == "HELLOWORLD");
 }
+
