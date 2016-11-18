@@ -1,6 +1,8 @@
 #ifndef MPAGSCIPHER_CIPER_HPP
 #define MPAGSCIPHER_CIPER_HPP
 
+#include "CipherMode.hpp"
+
 /**
 	
 */
