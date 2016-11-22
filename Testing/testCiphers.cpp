@@ -25,51 +25,14 @@ TEST_CASE( "Test encryption and decryption of ciphers", "[Cipher]") {
 	testCiphers.push_back( cipherFactory( CipherType::Playfair,pc ) );
 	testCiphers.push_back( cipherFactory( CipherType::Vigenere,vc ) );
 	
-	// Create lists of what encryption and decryption knowns
-	std::vector<std::string> encryptVec = { "HELLOWORLD","THEDOGSATONTHEMATS","HELLOWORLD" };
-	std::vector<std::string> decryptVec = { "ROVVYGYBVN","QOLCAFULYFTYELPLUT","RIJVSUYVJN" };
-
+	// Create lists of encryption and decryption knowns. 
+	std::vector<std::string> encryptVec = { "HELLOWORLD","BOBISSOMESORTOFJUNIORCOMPLEXXENOPHONEONEZEROTHING","HELLOWORLD" };
+	std::vector<std::string> encryptAnsVec = { "ROVVYGYBVN","FHIQXLTLKLTLSUFNPQPKETFENIOLVSWLTFIAFTLAKOWATEQOKPPA","RIJVSUYVJN" };
+	std::vector<std::string> decryptAnsVec = {"HELLOWORLD","BOBISXSOMESORTOFIUNIORCOMPLEXQXENOPHONEONEZEROTHINGZ","HELLOWORLD" };
+	
 	// Run loop over lists
 	for (size_t i{0} ; i < testCiphers.size() ; i++) {
-		REQUIRE( testCiphers[i]->applyCipher(encryptVec[i],CipherMode::Encrypt) == decryptVec[i] );
-		REQUIRE( testCiphers[i]->applyCipher(decryptVec[i],CipherMode::Decrypt) == encryptVec[i] );
+		REQUIRE( testCiphers[i]->applyCipher(encryptVec[i],CipherMode::Encrypt) == encryptAnsVec[i] );
+		REQUIRE( testCiphers[i]->applyCipher(encryptAnsVec[i],CipherMode::Decrypt) == decryptAnsVec[i] );
 	}
 }
-
-
-
-/*
-bool testCipher( const Cipher& cipher, const CipherMode mode, const std::string& inputText, const std::string& outputText)
-{
-	return cipher.applyCipher( inputText, mode ) == outputText;
-}
-
-TEST_CASE("Caesar Cipher encryption", "[Caesar]") {
-  CaesarCipher cc{10};
-  REQUIRE( testCipher ( cc, CipherMode::Encrypt, "HELLOWORLD", "ROVVYGYBVN") );
-}
-
-TEST_CASE("Caesar Cipher decryption", "[Caesar]") {
-  CaesarCipher cc{10};
-  REQUIRE( testCipher ( cc, CipherMode::Decrypt, "ROVVYGYBVN", "HELLOWORLD") );
-}
-
-TEST_CASE("Playfair Cipher encryption", "[Playfair]") {
-  PlayfairCipher cc{"hello"};
-  REQUIRE( testCipher ( cc, CipherMode::Encrypt, "BOBISSOMESORTOFJUNIORCOMPLEXXENOPHONEONEZEROTHING", "FHIQXLTLKLTLSUFNPQPKETFENIOLVSWLTFIAFTLAKOWATEQOKPPA") );
-}
-
-TEST_CASE("Playfair Cipher decryption", "[Playfair]") {
-  PlayfairCipher cc{"hello"};
-  REQUIRE( testCipher ( cc, CipherMode::Decrypt, "FHIQXLTLKLTLSUFNPQPKETFENIOLVSWLTFIAFTLAKOWATEQOKPPA", "BOBISXSOMESORTOFIUNIORCOMPLEXQXENOPHONEONEZEROTHINGZ") );
-}
-
-TEST_CASE("Vigenere Cipher encryption", "[Vigenere]") {
-  VigenereCipher cc{"key"};
-  REQUIRE( testCipher ( cc, CipherMode::Encrypt, "HELLOWORLD", "RIJVSUYVJN") );
-}
-
-TEST_CASE("Vigenere Cipher decryption", "[Vigenere]") {
-  VigenereCipher cc{"key"};
-  REQUIRE( testCipher ( cc, CipherMode::Decrypt, "RIJVSUYVJN", "HELLOWORLD") );
-}*/
