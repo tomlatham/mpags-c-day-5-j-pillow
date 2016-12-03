@@ -12,6 +12,10 @@
 #include "Cipher.hpp"
 #include "CipherFactory.hpp"
 
+bool testCipher( const Cipher& cipher, const CipherMode mode, const std::string& inputText, const std::string& outputText )
+{
+  return cipher.applyCipher( inputText, mode ) == outputText;
+}
 
 TEST_CASE( "Test encryption and decryption of ciphers", "[Cipher]") {
 	
@@ -32,7 +36,8 @@ TEST_CASE( "Test encryption and decryption of ciphers", "[Cipher]") {
 	
 	// Run loop over lists
 	for (size_t i{0} ; i < testCiphers.size() ; i++) {
-		REQUIRE( testCiphers[i]->applyCipher(encryptVec[i],CipherMode::Encrypt) == encryptAnsVec[i] );
-		REQUIRE( testCiphers[i]->applyCipher(encryptAnsVec[i],CipherMode::Decrypt) == decryptAnsVec[i] );
+		REQUIRE( testCiphers[i] );
+		REQUIRE( testCipher( *testCiphers[i], CipherMode::Encrypt, encryptVec[i],    encryptAnsVec[i]) );
+		REQUIRE( testCipher( *testCiphers[i], CipherMode::Decrypt, encryptAnsVec[i], decryptAnsVec[i]) );
 	}
 }

@@ -9,9 +9,6 @@
 #include "CipherType.hpp"
 #include "TransformChar.hpp"
 #include "ProcessCommandLine.hpp"
-#include "CaesarCipher.hpp"
-#include "PlayfairCipher.hpp"
-#include "VigenereCipher.hpp"
 #include "CipherFactory.hpp"
   
 // Main function of the mpags-cipher program
@@ -66,7 +63,7 @@ int main(int argc, char* argv[])
 
 	// Handle version, if requested
 	if (settings.versionRequested) {
-		std::cout << "0.6.0" << std::endl;
+		std::cout << "0.5.0" << std::endl;
 		// Like help, requires no further action, so return from main,
 		// with 0 used to indicate success
 		return 0;
@@ -100,8 +97,16 @@ int main(int argc, char* argv[])
 		}
 	}
 	
+	// Request construction of the appropriate cipher
 	auto cipher = cipherFactory( settings.cipherType, settings.cipherKey );
 	
+	// Check that the cipher was constructed successfully
+	if ( ! cipher ) {
+		std::cerr << "[error] problem constructing requested cipher" << std::endl;
+		return 1;
+	}
+
+	// Run the cipher on the input text, specifying whether to encrypt/decrypt
 	std::string outputText{cipher->applyCipher( inputText, settings.cipherMode )};
 
 	// Output the transliterated text

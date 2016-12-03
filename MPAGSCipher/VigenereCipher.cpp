@@ -39,15 +39,13 @@ void VigenereCipher::setKey ( const std::string& key )
 
 std::string VigenereCipher::applyCipher ( const std::string& inputText, const CipherMode cipherMode ) const
 {
-
-	// For each letter in input: Find the corresponding letter in the key, repeating/truncating as required
-	
 	// Create output string
 	std::string outputText{""};
 	
+	// Loop through the text
 	for ( size_t i{0} ; i < inputText.length() ; i++ ) {
 		const char keyLet = key_[ i % key_.length() ]; 				// Find corresponding letter of key. Loop over key if needed
-		const auto cipher = (charLookup_.find( keyLet ))->second; 	// Find what the shift value for that letter is
+		const auto& cipher = (charLookup_.find( keyLet ))->second; 	// Find what the shift value for that letter is
 		const std::string letterStr{inputText[i]}; 					// Convert inputText letter from char to std::string
 		outputText += cipher.applyCipher( letterStr, cipherMode );	// Apply encryption/decryption, and add to output text
 	}

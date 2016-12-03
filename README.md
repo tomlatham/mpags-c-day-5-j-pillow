@@ -121,7 +121,7 @@ MPAGS-Code
 │   └── Doxyfile.in
 ├── MPAGSCipher           Subdirectory for MPAGSCipher library code
 │   ├── CMakeLists.txt
-│	├── Alphabet.hpp
+│   ├── Alphabet.hpp
 │   ├── CaesarCipher.cpp
 │   ├── CaesarCipher.hpp
 │   ├── CipherFactory.cpp
